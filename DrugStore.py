@@ -2,6 +2,20 @@ import sqlite3
 import tkinter as tk
 from tkinter import messagebox, scrolledtext
 
+conn = sqlite3.connect('drugstore.db')
+cursor = conn.cursor()
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS Drugs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        manufacturer TEXT NOT NULL,
+        price REAL NOT NULL,
+        stock_quantity INTEGER NOT NULL
+    )
+    ''')
+conn.commit()
+conn.close()
+
 # Database functions
 def add_drug(name, manufacturer, price, stock_quantity):
     conn = sqlite3.connect('drugstore.db')
